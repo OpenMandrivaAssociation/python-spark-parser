@@ -6,7 +6,10 @@ Summary:	An Earley-Algorithm Context-free grammar Parser Toolkit
 URL:		https://pypi.org/project/spark-parser/
 License:	MIT
 Group:		Development/Python
+BuildRequires:	python%{pyver}dist(click)
 BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(wheel)
 BuildArch:	noarch
 
 %description
@@ -14,6 +17,16 @@ An Earley-Algorithm Context-free grammar Parser Toolkit
 
 %prep
 %autosetup -p1 -n spark_parser-%{version}
+# py-modules lists a top-level example.py that the sdist does not ship.
+python - << 'PY'
+from pathlib import Path
+p = Path("pyproject.toml")
+text = p.read_text()
+old = "py-modules = [\n    \"example\",\n]\n"
+if old not in text:
+    raise SystemExit("py-modules block missing")
+p.write_text(text.replace(old, "", 1))
+PY
 
 %build
 %py_build
