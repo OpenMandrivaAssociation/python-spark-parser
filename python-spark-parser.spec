@@ -1,6 +1,6 @@
 Name:		python-spark-parser
 Version:	1.9.0
-Release:	2
+Release:	3
 Source0:	https://files.pythonhosted.org/packages/source/s/spark-parser/spark_parser-%{version}.tar.gz
 Summary:	An Earley-Algorithm Context-free grammar Parser Toolkit
 URL:		https://pypi.org/project/spark-parser/
